@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: crud-hospital-pt2
+  datasource:
+    url: jdbc:postgresql://localhost:5433/dbHospital
+    username: postgres
+    password: kaizen
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # Cria as tabelas automaticamente com base nas suas classes Java
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
