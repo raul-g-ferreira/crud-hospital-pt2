@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,7 +29,7 @@ public class Ward {
 
     @OneToMany(mappedBy = "ward", cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JsonManagedReference
-    private List<Room> rooms;
+    private List<Room> rooms = new ArrayList<>();
 
     public Ward(Specialty specialty, Hospital hospital) {
         this.specialty = specialty;

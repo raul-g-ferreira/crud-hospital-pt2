@@ -5,7 +5,9 @@ import com.example.crud_hospital_pt2.dto.WardDTO;
 import com.example.crud_hospital_pt2.model.Room;
 import com.example.crud_hospital_pt2.model.Ward;
 import com.example.crud_hospital_pt2.repository.RoomRepository;
+import com.example.crud_hospital_pt2.repository.WardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +18,12 @@ public class RoomService {
 
     @Autowired
     private BedService bedService;
-    @Autowired
-    private WardService wardService;
 
+    private final WardRepository wardRepository;
     private final RoomRepository roomRepository;
 
-    public RoomService(RoomRepository roomRepository) {
+    public RoomService(WardRepository wardRepository, RoomRepository roomRepository) {
+        this.wardRepository = wardRepository;
         this.roomRepository = roomRepository;
     }
 
@@ -52,7 +54,7 @@ public class RoomService {
     }
 
     public ResponseEntity<Room> create(Long wardId, RoomDTO roomDTO) {
-        Ward ward = this.wardService.findById(wardId);
+        Ward ward = this.wardRepository.findById(wardId).orElseThrow();
 
         WardDTO wardDTO = new WardDTO(ward.getSpecialty().toString(), 1, roomDTO.getNumberOfBeds());
 

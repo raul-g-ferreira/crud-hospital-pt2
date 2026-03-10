@@ -5,10 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Patient {
 
     @Id
@@ -18,4 +22,10 @@ public class Patient {
     private String name;
     private String cpf;
     private String phone;
+
+    public Patient(String name, String cpf, String phone) {
+        this.name = name;
+        this.cpf = cpf;
+        this.phone = phone;
+    }
 }

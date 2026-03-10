@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class HospitalService {
@@ -38,5 +39,9 @@ public class HospitalService {
 
     public Hospital findById(Long id) {
         return hospitalRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
+    public ResponseEntity<List<Hospital>> getAll() {
+        return ResponseEntity.ok(hospitalRepository.findAll());
     }
 }

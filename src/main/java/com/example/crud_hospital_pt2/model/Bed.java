@@ -23,6 +23,10 @@ public class Bed {
     @JsonBackReference
     private Room room;
 
+    @OneToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
     public Bed(BedStatus status, Integer bedNumber, Room room) {
         this.status = status;
         this.bedNumber = bedNumber;

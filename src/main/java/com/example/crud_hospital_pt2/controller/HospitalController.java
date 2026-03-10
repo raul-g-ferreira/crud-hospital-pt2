@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/hospital")
 public class HospitalController {
@@ -18,6 +20,11 @@ public class HospitalController {
     @PostMapping("/create")
     public ResponseEntity<Hospital> create(@RequestBody HospitalDTO hospitalDto) {
         return ResponseEntity.ok(hospitalService.create(hospitalDto).getBody());
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<Hospital>> getAll() {
+        return this.hospitalService.getAll();
     }
 
 }

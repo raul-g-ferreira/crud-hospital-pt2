@@ -5,6 +5,7 @@ import com.example.crud_hospital_pt2.model.Hospital;
 import com.example.crud_hospital_pt2.model.Room;
 import com.example.crud_hospital_pt2.model.Specialty;
 import com.example.crud_hospital_pt2.model.Ward;
+import com.example.crud_hospital_pt2.repository.HospitalRepository;
 import com.example.crud_hospital_pt2.repository.WardRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,17 @@ public class WardService {
     @Autowired
     private RoomService roomService;
 
-    @Autowired
-    private HospitalService hospitalService;
 
+    private final HospitalRepository hospitalRepository;
     private final WardRepository wardRepository;
 
-    public WardService(WardRepository wardRepository) {
+    public WardService(HospitalRepository hospitalRepository, WardRepository wardRepository) {
+        this.hospitalRepository = hospitalRepository;
         this.wardRepository = wardRepository;
     }
 
     public ResponseEntity<Ward> create(Long hospitalId, WardDTO wardDTO) {
-        Hospital hospital = this.hospitalService.findById(hospitalId);
+        Hospital hospital = this.hospitalRepository.findById(hospitalId).orElseThrow(RuntimeException::new);
         ArrayList<WardDTO> wardDTOS = new ArrayList<>();
         wardDTOS.add(wardDTO);
         ArrayList<Ward> wards = generateWards(hospital, wardDTOS);

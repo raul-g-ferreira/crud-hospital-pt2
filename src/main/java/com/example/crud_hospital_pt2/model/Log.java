@@ -2,12 +2,16 @@ package com.example.crud_hospital_pt2.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Log {
 
     @Id
@@ -26,4 +30,11 @@ public class Log {
 
     @Enumerated(EnumType.STRING)
     private Event eventType;
+
+    public Log(Bed bed, Patient patient, LocalDateTime dateTime, Event eventType) {
+        this.bed = bed;
+        this.patient = patient;
+        this.dateTime = dateTime;
+        this.eventType = eventType;
+    }
 }
