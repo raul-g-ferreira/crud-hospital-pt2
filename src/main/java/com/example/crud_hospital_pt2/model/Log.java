@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class AdmissionLog {
+public class Log {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,5 +24,6 @@ public class AdmissionLog {
 
     private LocalDateTime dateTime;
 
+    @Enumerated(EnumType.STRING)
     private Event eventType;
 }

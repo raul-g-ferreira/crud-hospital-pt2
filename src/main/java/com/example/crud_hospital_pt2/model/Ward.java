@@ -1,32 +1,38 @@
 package com.example.crud_hospital_pt2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String specialty;
+    @Enumerated(EnumType.STRING)
+    private Specialty specialty;
 
     @ManyToOne
     @JoinColumn(name = "hospital_id", nullable = false)
+    @JsonBackReference
     private Hospital hospital;
 
-    @OneToMany
-    private ArrayList<Room> rooms;
+    @OneToMany(mappedBy = "ward", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Room> rooms;
 
-    public Ward(String specialty, Hospital hospital) {
+    public Ward(Specialty specialty, Hospital hospital) {
         this.specialty = specialty;
         this.hospital = hospital;
     }
 
-    public Ward() {
-
-    }
 }

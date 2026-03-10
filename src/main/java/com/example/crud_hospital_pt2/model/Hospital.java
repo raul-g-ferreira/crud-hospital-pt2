@@ -1,10 +1,12 @@
 package com.example.crud_hospital_pt2.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,8 +19,9 @@ public class Hospital {
     private String cnpj;
 
 
-    @OneToMany
-    private ArrayList<Ward> wards;
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Ward> wards;
 
     public Hospital(String name, String phone, String cnpj) {
         this.name = name;
