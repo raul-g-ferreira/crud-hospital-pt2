@@ -1,5 +1,0 @@
-GenerateWard
-- gera a ala e chama itera o generateRoom a roomQuantity
-	generateRoom(ward, bedsPerRoom, roomNumber)
-	- gera a room e chama o generateBed bedsPerRoonQuantity
-		generateBed
