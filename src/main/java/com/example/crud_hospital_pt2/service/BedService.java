@@ -58,4 +58,15 @@ public class BedService {
     public List<Bed> getAll() {
         return bedRepository.findAll();
     }
+
+    public Bed prepare(Long bedId) {
+        Bed bed = this.findById(bedId);
+
+        if (bed.getStatus() == BedStatus.IN_PREPARATION) {
+            bed.setStatus(BedStatus.UNOCCUPIED);
+            return this.bedRepository.save(bed);
+        }
+
+        throw new IllegalStateException("O leito em questao nao pode ser preparado");
+    }
 }

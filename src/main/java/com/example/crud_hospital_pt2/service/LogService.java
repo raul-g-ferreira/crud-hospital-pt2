@@ -21,6 +21,8 @@ public class LogService {
 
     private final LogRepository logRepository;
     private final BedRepository bedRepository;
+    @Autowired
+    private RoomService roomService;
 
     public LogService(LogRepository logRepository, BedRepository bedRepository) {
         this.logRepository = logRepository;
@@ -41,10 +43,12 @@ public class LogService {
             case ADMISSION:
                 validAdmission(patient, bed);
                 admission(patient, bed);
+                roomService.setRoomFull(bed);
                 break;
             case DISCHARGE:
                 validDischarge(patient, bed);
                 discharge(patient, bed);
+                roomService.setRoomFull(bed);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + logDTO.getEventType());

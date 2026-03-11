@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/room")
 public class RoomController {
@@ -17,6 +19,11 @@ public class RoomController {
 
     @PostMapping("/create/{wardId}")
     public ResponseEntity<Room> create(@PathVariable Long wardId, @RequestBody RoomDTO roomDTO) {
-        return this.roomService.create(wardId, roomDTO);
+        return ResponseEntity.ok(this.roomService.create(wardId, roomDTO));
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<Room>> getAll() {
+        return ResponseEntity.ok(roomService.getAll());
     }
 }

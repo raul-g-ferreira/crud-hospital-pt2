@@ -5,10 +5,9 @@ import com.example.crud_hospital_pt2.model.Log;
 import com.example.crud_hospital_pt2.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/log")
@@ -20,5 +19,10 @@ public class LogController {
     @PostMapping("/create")
     public ResponseEntity<Log> create(@RequestBody LogDTO logDTO) {
         return this.logService.create(logDTO);
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<List<Log>> getAll() {
+        return ResponseEntity.ok(this.logService.getAll());
     }
 }

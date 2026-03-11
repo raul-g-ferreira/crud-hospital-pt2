@@ -27,4 +27,9 @@ public class BedController {
     public ResponseEntity<List<Bed>> getAll() {
         return ResponseEntity.ok(bedService.getAll());
     }
+
+    @PatchMapping("/prepare/{bedId}")
+    public ResponseEntity<Bed> setUnoccupied(@PathVariable Long bedId) {
+        return ResponseEntity.ok(this.bedService.prepare(bedId));
+    }
 }

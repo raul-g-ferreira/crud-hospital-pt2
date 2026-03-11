@@ -18,11 +18,11 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "bed_id")
     private Bed bed;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
