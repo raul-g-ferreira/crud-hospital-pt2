@@ -11,16 +11,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class PatientInternmentDetailsDTO {
-    private String hospitalName;
-    private Specialty specialty;
-    private String roomCode;
     private String patientName;
-    private LocalDateTime internmentDate;
+    private Specialty specialty;
+    private LocalDateTime admissionDate;
+    private Integer duration;
 
-    public PatientInternmentDetailsDTO(String hospitalName, Specialty specialty, String roomCode, String patientName) {
-        this.hospitalName = hospitalName;
-        this.specialty = specialty;
-        this.roomCode = roomCode;
+    public PatientInternmentDetailsDTO(String patientName, Specialty specialty, LocalDateTime admissionDate) {
         this.patientName = patientName;
+        this.specialty = specialty;
+        this.admissionDate = admissionDate;
     }
 }

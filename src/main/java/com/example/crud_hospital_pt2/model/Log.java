@@ -26,15 +26,15 @@ public class Log {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    private LocalDateTime dateTime;
+    private LocalDateTime timestamp;
 
     @Enumerated(EnumType.STRING)
     private Event eventType;
 
-    public Log(Bed bed, Patient patient, LocalDateTime dateTime, Event eventType) {
+    public Log(Bed bed, Patient patient, LocalDateTime timestamp, Event eventType) {
         this.bed = bed;
         this.patient = patient;
-        this.dateTime = dateTime;
+        this.timestamp = timestamp;
         this.eventType = eventType;
     }
 }
