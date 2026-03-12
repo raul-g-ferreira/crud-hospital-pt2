@@ -2,6 +2,8 @@ package com.example.crud_hospital_pt2.service;
 
 import com.example.crud_hospital_pt2.dto.BedDTO;
 import com.example.crud_hospital_pt2.dto.RoomDTO;
+import com.example.crud_hospital_pt2.exception.BedNotFoundException;
+import com.example.crud_hospital_pt2.exception.RoomNotFoundException;
 import com.example.crud_hospital_pt2.model.Bed;
 import com.example.crud_hospital_pt2.model.BedStatus;
 import com.example.crud_hospital_pt2.model.Room;
@@ -38,7 +40,7 @@ public class BedService {
     }
 
     public ResponseEntity<Bed> create(BedDTO bedDTO) {
-        Room room = this.roomRepository.findById(bedDTO.getRoomId()).orElseThrow();
+        Room room = this.roomRepository.findById(bedDTO.getRoomId()).orElseThrow(() -> new RoomNotFoundException("Couldn't find room with id: " + bedDTO.getRoomId()));
         Integer bedNumber = room.getBeds().size() + 1;
         Bed newBed = new Bed(BedStatus.UNOCCUPIED, bedNumber, room);
 
@@ -46,14 +48,14 @@ public class BedService {
     }
 
     public Bed findById(Long id) {
-        return bedRepository.findById(id).orElseThrow(RuntimeException::new);
+        return bedRepository.findById(id).orElseThrow(() -> new BedNotFoundException("Could not find bed with id: " + id));
     }
 
-    public void setBedStatus(Long bedId, BedStatus bedStatus) {
-        Bed bed = this.findById(bedId);
-        bed.setStatus(bedStatus);
-        bedRepository.save(bed);
-    }
+//    public void setBedStatus(Long bedId, BedStatus bedStatus) {
+//        Bed bed = this.findById(bedId);
+//        bed.setStatus(bedStatus);
+//        bedRepository.save(bed);
+//    }
 
     public List<Bed> getAll() {
         return bedRepository.findAll();

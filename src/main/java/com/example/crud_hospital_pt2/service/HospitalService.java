@@ -2,6 +2,7 @@ package com.example.crud_hospital_pt2.service;
 
 import com.example.crud_hospital_pt2.dto.HospitalDTO;
 import com.example.crud_hospital_pt2.dto.WardDTO;
+import com.example.crud_hospital_pt2.exception.HospitalNotFoundException;
 import com.example.crud_hospital_pt2.model.Hospital;
 import com.example.crud_hospital_pt2.model.Ward;
 import com.example.crud_hospital_pt2.repository.HospitalRepository;
@@ -30,7 +31,7 @@ public class HospitalService {
         Hospital newHospital = new Hospital(hospitalDTO.getHospitalName(), hospitalDTO.getHospitalPhone(), hospitalDTO.getHospitalCnpj());
 
 
-        ArrayList<Ward> wardList = wardService.generateWards(newHospital, hospitalDTO.getWardDTOs());
+        List<Ward> wardList = wardService.generateWards(newHospital, hospitalDTO.getWardDTOs());
 
         newHospital.setWards(wardList);
         return ResponseEntity.ok(hospitalRepository.save(newHospital));
@@ -38,7 +39,7 @@ public class HospitalService {
 
 
     public Hospital findById(Long id) {
-        return hospitalRepository.findById(id).orElseThrow(RuntimeException::new);
+        return hospitalRepository.findById(id).orElseThrow(() -> new HospitalNotFoundException("Could not find hospital with id: "+ id));
     }
 
     public ResponseEntity<List<Hospital>> getAll() {

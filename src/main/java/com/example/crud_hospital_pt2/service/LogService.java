@@ -59,14 +59,14 @@ public class LogService {
     }
 
     private void validAdmission(Patient patient, Bed bed) {
-        if (bed.getPatient() != null) throw new IllegalArgumentException("O leito já está ocupado");
+        if (bed.getPatient() != null) throw new IllegalArgumentException("Bed with id: " + bed.getId() + " is already occupied");
 
         boolean patientInBed = bedRepository.findAll().stream().anyMatch(b -> b.getPatient() != null && b.getPatient().equals(patient));
-        if (patientInBed) throw new IllegalArgumentException("O paciente já está internado");
+        if (patientInBed) throw new IllegalArgumentException("Patient with id: " + patient.getId() + " is already hospitalized");
     }
 
     private void validDischarge(Patient patient, Bed bed) {
-        if (bed.getPatient() != patient) throw new IllegalArgumentException("O paciente não se encontra nesse leito");
+        if (bed.getPatient() != patient) throw new IllegalArgumentException("Patient discharged or in another bed");
     }
 
     public void admission(Patient patient, Bed bed) {

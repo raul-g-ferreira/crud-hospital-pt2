@@ -1,6 +1,7 @@
 package com.example.crud_hospital_pt2.service;
 
 import com.example.crud_hospital_pt2.dto.WardDTO;
+import com.example.crud_hospital_pt2.exception.WardNotFoundException;
 import com.example.crud_hospital_pt2.model.Hospital;
 import com.example.crud_hospital_pt2.model.Room;
 import com.example.crud_hospital_pt2.model.Specialty;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class WardService {
@@ -33,16 +35,18 @@ public class WardService {
         Hospital hospital = this.hospitalRepository.findById(hospitalId).orElseThrow(RuntimeException::new);
         ArrayList<WardDTO> wardDTOS = new ArrayList<>();
         wardDTOS.add(wardDTO);
-        ArrayList<Ward> wards = generateWards(hospital, wardDTOS);
+        List<Ward> wards = generateWards(hospital, wardDTOS);
 
-        return ResponseEntity.ok(wardRepository.save(wards.getFirst()));
+        return ResponseEntity.ok(wardRepository.save(wards.getLast()));
     }
 
 
-    public ArrayList<Ward> generateWards(Hospital hospital, ArrayList<WardDTO> wardDTOS) {
-        ArrayList<Ward> wardList = new ArrayList<>();
+    public List<Ward> generateWards(Hospital hospital, ArrayList<WardDTO> wardDTOS) {
+        List<Ward> wardList = hospital.getWards() == null? new ArrayList<>() : hospital.getWards();
 
         for (WardDTO dto : wardDTOS) {
+            boolean wardAlreadyExists = wardList.stream().anyMatch(ward -> ward.getSpecialty().name().equals(dto.getSpecialty()));
+            if (wardAlreadyExists) throw new IllegalArgumentException("The " + dto.getSpecialty() + " ward already exists");
             Ward newWard = new Ward(Specialty.valueOf(dto.getSpecialty().toUpperCase()), hospital);
 
             newWard.setRooms(roomService.generateRooms(newWard, dto));
@@ -54,7 +58,7 @@ public class WardService {
     }
 
     public Ward findById(Long id) {
-        return wardRepository.findById(id).orElseThrow(RuntimeException::new);
+        return wardRepository.findById(id).orElseThrow(() -> new WardNotFoundException("Ward not found, id:" + id));
     }
 
 }

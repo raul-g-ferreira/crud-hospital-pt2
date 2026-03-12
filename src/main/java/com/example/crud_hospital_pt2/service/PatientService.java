@@ -1,5 +1,6 @@
 package com.example.crud_hospital_pt2.service;
 
+import com.example.crud_hospital_pt2.exception.PatientNotFoundException;
 import com.example.crud_hospital_pt2.model.Patient;
 import com.example.crud_hospital_pt2.repository.PatientRepository;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,6 @@ public class PatientService {
     }
 
     public Patient findById(Long id) {
-        return this.patientRepository.findById(id).orElseThrow(RuntimeException::new);
+        return this.patientRepository.findById(id).orElseThrow(() -> new PatientNotFoundException("Patient with id: " + id + " not found"));
     }
 }

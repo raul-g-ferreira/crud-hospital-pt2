@@ -16,6 +16,7 @@ public class Hospital {
     private Long id;
     private String name;
     private String phone;
+    @Column(unique = true)
     private String cnpj;
 
 
