@@ -30,9 +30,9 @@ public class RoomService {
     }
 
     public List<Room> generateRooms(Ward ward, WardDTO dto) {
-        List<Room> roomList = ward.getRooms() == null? new ArrayList<>() : ward.getRooms();
+        List<Room> roomList = ward.getRooms() == null ? new ArrayList<>() : ward.getRooms();
 
-        for (int i = 1; i <= dto.getRoomQuantity() ; i++) {
+        for (int i = 1; i <= dto.getRoomQuantity(); i++) {
             // chamar a geração de roomCode
             String roomCode = generateRoomCode(ward, roomList);
 
@@ -56,7 +56,7 @@ public class RoomService {
 
     public String generateRoomCode(Ward ward, List<Room> roomList) {
         String code = "";
-        code += ward.getSpecialty().toString().substring(0,3).toUpperCase();
+        code += ward.getSpecialty().toString().substring(0, 3).toUpperCase();
         code += "-";
         code += (roomList.size() + 1);
 

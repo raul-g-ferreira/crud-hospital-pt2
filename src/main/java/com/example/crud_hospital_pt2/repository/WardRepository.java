@@ -20,9 +20,9 @@ public interface WardRepository extends JpaRepository<Ward, Long> {
             "left join r.beds b " +
             "where w.id = :wardId " +
             "group by w.id, w.specialty")
-    public WardOverviewDTO getWardOverview(@Param("wardId")Long wardId);
+    public WardOverviewDTO getWardOverview(@Param("wardId") Long wardId);
 
     @Query("select w.id from Ward w " +
             "where w.hospital.id = :hospitalId")
-    public List<Long> findAllIds(@Param("hospitalId")Long hospitalId);
+    public List<Long> findAllIds(@Param("hospitalId") Long hospitalId);
 }

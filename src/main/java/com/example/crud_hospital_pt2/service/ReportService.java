@@ -15,12 +15,12 @@ import java.util.List;
 @Service
 public class ReportService {
 
- private final HospitalRepository hospitalRepository;
- private final WardRepository wardRepository;
- private final RoomRepository roomRepository;
- private final BedRepository bedRepository;
- private final PatientRepository patientRepository;
- private final LogRepository logRepository;
+    private final HospitalRepository hospitalRepository;
+    private final WardRepository wardRepository;
+    private final RoomRepository roomRepository;
+    private final BedRepository bedRepository;
+    private final PatientRepository patientRepository;
+    private final LogRepository logRepository;
 
     public ReportService(HospitalRepository hospitalRepository, WardRepository wardRepository, RoomRepository roomRepository, BedRepository bedRepository, PatientRepository patientRepository, LogRepository logRepository) {
         this.hospitalRepository = hospitalRepository;
@@ -48,17 +48,15 @@ public class ReportService {
 
         List<Long> wardIds = wardRepository.findAllIds(hospitalId);
 
-        List <WardOverviewDTO> wardReports = wardIds.stream()
-                .map(wardRepository::getWardOverview)
-                .toList();
+        List<WardOverviewDTO> wardReports = wardIds.stream().map(wardRepository::getWardOverview).toList();
 
         report.setWardOverviewDTOS(wardReports);
 
         return report;
     }
 
-    public PatientInternmentLocationDTO findPatientInternmentDetails(Long patientId) {
-        PatientInternmentLocationDTO report = patientRepository.findPatientInternmentDetails(patientId);
+    public PatientInternmentLocationDTO findPatientInternmentLocation(Long patientId) {
+        PatientInternmentLocationDTO report = patientRepository.findPatientInternmentLocation(patientId);
 
         report.setInternmentDate(logRepository.findLogByPatient_IdOrderByTimestamp(patientId).getFirst().getTimestamp());
 

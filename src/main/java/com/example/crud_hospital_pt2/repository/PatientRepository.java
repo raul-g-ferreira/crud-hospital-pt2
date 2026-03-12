@@ -13,5 +13,5 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
             "from Patient p " +
             "left join Bed b on b.patient = p " +
             "where p.id = :patientId")
-    public PatientInternmentLocationDTO findPatientInternmentDetails(@Param("patientId") Long patientId);
+    public PatientInternmentLocationDTO findPatientInternmentLocation(@Param("patientId") Long patientId);
 }

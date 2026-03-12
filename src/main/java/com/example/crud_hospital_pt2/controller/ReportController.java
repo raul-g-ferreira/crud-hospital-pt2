@@ -40,7 +40,7 @@ public class ReportController {
 
     @GetMapping("/internment-det/{patientId}") // Criar requisição que retorne pelo id do paciente que está internado
     public ResponseEntity<PatientInternmentLocationDTO> getInternmentDetails(@PathVariable Long patientId) {
-        return ResponseEntity.ok(reportService.findPatientInternmentDetails(patientId));
+        return ResponseEntity.ok(reportService.findPatientInternmentLocation(patientId));
     }
 
     @GetMapping("/patient-timeline/{patientId}") // Criar requisição paginada que retorne o histórico de internamento de um paciente
