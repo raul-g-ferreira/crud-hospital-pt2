@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static org.springframework.http.ResponseEntity.ok;
-
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/bed")
 public class BedController {
