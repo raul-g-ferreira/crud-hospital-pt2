@@ -43,7 +43,7 @@ public class WardService {
 
     public List<Ward> generateWards(Hospital hospital, ArrayList<WardDTO> wardDTOS) {
         List<Ward> wardList = hospital.getWards() == null? new ArrayList<>() : hospital.getWards();
-
+        if (wardDTOS.isEmpty()) return wardList;
         for (WardDTO dto : wardDTOS) {
             boolean wardAlreadyExists = wardList.stream().anyMatch(ward -> ward.getSpecialty().name().equals(dto.getSpecialty()));
             if (wardAlreadyExists) throw new IllegalArgumentException("The " + dto.getSpecialty() + " ward already exists");
