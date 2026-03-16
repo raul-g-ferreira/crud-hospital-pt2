@@ -37,7 +37,6 @@ public class HospitalService {
         return ResponseEntity.ok(hospitalRepository.save(newHospital));
     }
 
-
     public Hospital findById(Long id) {
         return hospitalRepository.findById(id).orElseThrow(() -> new HospitalNotFoundException("Could not find hospital with id: "+ id));
     }

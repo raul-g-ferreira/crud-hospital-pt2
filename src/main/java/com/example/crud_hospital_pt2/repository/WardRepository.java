@@ -1,6 +1,6 @@
 package com.example.crud_hospital_pt2.repository;
 
-import com.example.crud_hospital_pt2.dto.WardOverviewDTO;
+import com.example.crud_hospital_pt2.dto.report.WardOverviewDTO;
 import com.example.crud_hospital_pt2.model.Ward;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface WardRepository extends JpaRepository<Ward, Long> {
 
-    @Query("select new com.example.crud_hospital_pt2.dto.WardOverviewDTO(" +
+    @Query("select new com.example.crud_hospital_pt2.dto.report.WardOverviewDTO(" +
             "w.specialty," +
             "cast(sum(case when b.status = 'OCCUPIED' then 1 else 0 end)as integer)," +
             "cast(sum(case when b.status = 'IN_PREPARATION' then 1 else 0 end)as integer)," +

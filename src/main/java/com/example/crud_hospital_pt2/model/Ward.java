@@ -1,5 +1,6 @@
 package com.example.crud_hospital_pt2.model;
 
+import com.example.crud_hospital_pt2.model.enums.Specialty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;

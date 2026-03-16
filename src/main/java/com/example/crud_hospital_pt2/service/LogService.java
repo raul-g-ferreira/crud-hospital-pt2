@@ -2,6 +2,8 @@ package com.example.crud_hospital_pt2.service;
 
 import com.example.crud_hospital_pt2.dto.LogDTO;
 import com.example.crud_hospital_pt2.model.*;
+import com.example.crud_hospital_pt2.model.enums.BedStatus;
+import com.example.crud_hospital_pt2.model.enums.Event;
 import com.example.crud_hospital_pt2.repository.BedRepository;
 import com.example.crud_hospital_pt2.repository.LogRepository;
 import org.springframework.beans.factory.annotation.Autowired;

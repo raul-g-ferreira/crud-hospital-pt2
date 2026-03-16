@@ -1,6 +1,6 @@
 package com.example.crud_hospital_pt2.controller;
 
-import com.example.crud_hospital_pt2.dto.*;
+import com.example.crud_hospital_pt2.dto.report.*;
 import com.example.crud_hospital_pt2.model.Room;
 import com.example.crud_hospital_pt2.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;

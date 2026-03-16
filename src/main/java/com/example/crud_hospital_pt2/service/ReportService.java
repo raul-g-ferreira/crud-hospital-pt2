@@ -1,6 +1,6 @@
 package com.example.crud_hospital_pt2.service;
 
-import com.example.crud_hospital_pt2.dto.*;
+import com.example.crud_hospital_pt2.dto.report.*;
 import com.example.crud_hospital_pt2.model.Room;
 import com.example.crud_hospital_pt2.repository.*;
 import org.springframework.data.domain.Page;

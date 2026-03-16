@@ -1,15 +1,13 @@
 package com.example.crud_hospital_pt2.service;
 
 import com.example.crud_hospital_pt2.dto.BedDTO;
-import com.example.crud_hospital_pt2.dto.RoomDTO;
 import com.example.crud_hospital_pt2.exception.BedNotFoundException;
 import com.example.crud_hospital_pt2.exception.RoomNotFoundException;
 import com.example.crud_hospital_pt2.model.Bed;
-import com.example.crud_hospital_pt2.model.BedStatus;
+import com.example.crud_hospital_pt2.model.enums.BedStatus;
 import com.example.crud_hospital_pt2.model.Room;
 import com.example.crud_hospital_pt2.repository.BedRepository;
 import com.example.crud_hospital_pt2.repository.RoomRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +30,8 @@ public class BedService {
 
         for (int i = 1; i <= numberOfBeds; i++) {
             Bed newBed = new Bed(BedStatus.UNOCCUPIED, i, room);
-
             bedList.add(newBed);
         }
-
         return bedList;
     }
 
@@ -51,12 +47,6 @@ public class BedService {
         return bedRepository.findById(id).orElseThrow(() -> new BedNotFoundException("Could not find bed with id: " + id));
     }
 
-//    public void setBedStatus(Long bedId, BedStatus bedStatus) {
-//        Bed bed = this.findById(bedId);
-//        bed.setStatus(bedStatus);
-//        bedRepository.save(bed);
-//    }
-
     public List<Bed> getAll() {
         return bedRepository.findAll();
     }
@@ -68,7 +58,6 @@ public class BedService {
             bed.setStatus(BedStatus.UNOCCUPIED);
             return this.bedRepository.save(bed);
         }
-
         throw new IllegalStateException("O leito em questao nao pode ser preparado");
     }
 }

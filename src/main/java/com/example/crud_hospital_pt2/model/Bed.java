@@ -1,6 +1,7 @@
 package com.example.crud_hospital_pt2.model;
 
 
+import com.example.crud_hospital_pt2.model.enums.BedStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;

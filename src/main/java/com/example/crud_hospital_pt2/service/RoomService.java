@@ -33,7 +33,6 @@ public class RoomService {
         List<Room> roomList = ward.getRooms() == null ? new ArrayList<>() : ward.getRooms();
 
         for (int i = 1; i <= dto.getRoomQuantity(); i++) {
-            // chamar a geração de roomCode
             String roomCode = generateRoomCode(ward, roomList);
 
             Room newRoom = new Room(ward, Boolean.FALSE, roomCode);
@@ -58,8 +57,8 @@ public class RoomService {
         String code = "";
         code += ward.getSpecialty().toString().substring(0, 3).toUpperCase();
         code += "-";
-        code += (roomList.size() + 1);
-
+//        code += (roomList.size() + 1);
+        code += ((int) roomList.getLast().getRoomCode().substring(4)) + 1;
         return code;
     }
 

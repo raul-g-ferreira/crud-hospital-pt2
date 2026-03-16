@@ -1,8 +1,8 @@
 package com.example.crud_hospital_pt2.repository;
 
-import com.example.crud_hospital_pt2.dto.BedTimelineDTO;
-import com.example.crud_hospital_pt2.dto.PatientInternmentDetailsDTO;
-import com.example.crud_hospital_pt2.dto.PatientTimelineDTO;
+import com.example.crud_hospital_pt2.dto.report.BedTimelineDTO;
+import com.example.crud_hospital_pt2.dto.report.PatientInternmentDetailsDTO;
+import com.example.crud_hospital_pt2.dto.report.PatientTimelineDTO;
 import com.example.crud_hospital_pt2.model.Log;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +15,7 @@ import java.util.List;
 public interface LogRepository extends JpaRepository<Log, Long> {
     List<Log> findLogByPatient_IdOrderByTimestamp(Long patientId);
 
-    @Query("SELECT new com.example.crud_hospital_pt2.dto.PatientTimelineDTO(" +
+    @Query("SELECT new com.example.crud_hospital_pt2.dto.report.PatientTimelineDTO(" +
             "l.patient.name, " +
             "l.bed.room.ward.specialty, " +
             "l.timestamp, " +
@@ -27,7 +27,7 @@ public interface LogRepository extends JpaRepository<Log, Long> {
     Page<PatientTimelineDTO> findPatientTimeline(@Param("patientId") Long patientId, Pageable pageable);
 
 
-    @Query("select new com.example.crud_hospital_pt2.dto.BedTimelineDTO(" +
+    @Query("select new com.example.crud_hospital_pt2.dto.report.BedTimelineDTO(" +
             "l.bed.bedNumber, " +
             "l.patient.name, " +
             "l.timestamp," +
@@ -38,7 +38,7 @@ public interface LogRepository extends JpaRepository<Log, Long> {
             "order by l.timestamp desc ")
     List<BedTimelineDTO> findBedTimeline(@Param("bedId") Long bedId);
 
-    @Query("select new com.example.crud_hospital_pt2.dto.PatientInternmentDetailsDTO(" +
+    @Query("select new com.example.crud_hospital_pt2.dto.report.PatientInternmentDetailsDTO(" +
             "l.patient.name, l.bed.room.ward.specialty, l.timestamp)" +
             "from Log l " +
             "where l.eventType = 'ADMISSION' " +
@@ -46,5 +46,6 @@ public interface LogRepository extends JpaRepository<Log, Long> {
             "(select l2.timestamp from Log l2 where l2.patient.id = l.patient.id and l2.eventType = 'DISCHARGE' and l2.timestamp > l.timestamp order by l2.timestamp asc limit 1) " +
             "order by l.timestamp desc")
     List<PatientInternmentDetailsDTO> findAllInternmentDetails();
+
 
 }
