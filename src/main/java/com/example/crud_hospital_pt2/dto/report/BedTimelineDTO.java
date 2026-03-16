@@ -1,6 +1,5 @@
-package com.example.crud_hospital_pt2.dto;
+package com.example.crud_hospital_pt2.dto.report;
 
-import com.example.crud_hospital_pt2.model.Specialty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class PatientTimelineDTO {
+public class BedTimelineDTO {
+    private Integer bedNumber;
     private String patientName;
-    private Specialty specialty;
     private LocalDateTime admissionDate;
     private LocalDateTime dischargeDate;
+
+
 }

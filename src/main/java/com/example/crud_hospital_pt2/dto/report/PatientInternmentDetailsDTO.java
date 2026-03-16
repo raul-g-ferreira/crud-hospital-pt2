@@ -1,6 +1,6 @@
-package com.example.crud_hospital_pt2.dto;
+package com.example.crud_hospital_pt2.dto.report;
 
-import com.example.crud_hospital_pt2.model.Specialty;
+import com.example.crud_hospital_pt2.model.enums.Specialty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

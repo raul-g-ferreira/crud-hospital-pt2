@@ -1,4 +1,4 @@
-package com.example.crud_hospital_pt2.model;
+package com.example.crud_hospital_pt2.model.enums;
 
 public enum Event {
     ADMISSION,

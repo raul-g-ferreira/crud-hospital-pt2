@@ -1,4 +1,4 @@
-package com.example.crud_hospital_pt2.dto;
+package com.example.crud_hospital_pt2.dto.report;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
